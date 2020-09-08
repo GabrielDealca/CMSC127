@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<!-- navbar starts =================================-->
+<div class="container">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <a class="navbar-brand" href="/">Home</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      
+	      <li class="nav-item">
+	        <a class="nav-link" href="">All Products</a>
+	      </li>
+
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="/groups" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Groups
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	        	{% for group in groups %}
+
+	        	<a class="dropdown-item" href="{{url_for('get_group', id=group.id)}}">{{group.name}}</a>	
+	        	{% endfor %}       
+	        </div>
+	      </li>
+
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" href="/groups" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Categories
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	        	{% for category in categories %}
+
+	        	<a class="dropdown-item" href="{{url_for('get_category', id=category.id)}}">{{category.name}}</a>	
+	        	{% endfor %}       
+	        </div>
+	      </li>
+
+	      <li class="nav-item">
+	        <a class="nav-link disabled" href="#" tabindex="-1">Cart ({{session['Shoppingcart']|length}})</a>
+	      </li>
+	    </ul>
+	    <form class="form-inline my-2 my-lg-0">
+	      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	    </form>
+	  </div>
+	</nav>
+</div>
+<!-- navbar ends =================================-->
+
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-6" id="g_image">
+			<img src="{{url_for('static', filename='images/' + product.image_1)}}", alt="{{product.name}}" width="360" height="360">
+
+		</div>
+		<div class="col-md-6">
+			<h4> {{product.name}} </h4>
+			
+			<!-- {% for category in categories %}
+			<p> {{category.name}} </p>
+			{% endfor %} -->
+			<hr>
+			<p> $ {{product.price}} </p>
+			
+			<b> Description </b>
+			<p> {{product.desc}} </p>
+			
+			<form action="{{url_for('AddCart')}}" method="post">
+				<input type="hidden" name="product_id" value="{{product.id}}">
+				<button type="submit" class="btn btn-sm btn-warning"> Add to cart</button>
+				</label for=""> Quantity: </label>
+				<input type="number" name="quantity" id="" value="1" min="1" max="{{product.stock}}">
+			
+			
+			</form>		
+				
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-12 mt-3" id="s_image">
+			<hr>
+			<img src="{{url_for('static', filename='images/' + product.image_1)}}", alt="{{product.name}}" width="120" height="120" class="p-3">		
+			<img src="{{url_for('static', filename='images/' + product.image_2)}}", alt="{{product.name}}" width="120" height="120" class="p-3">
+			<img src="{{url_for('static', filename='images/' + product.image_3)}}", alt="{{product.name}}" width="120" height="120" class="p-3">
+	</div>
+</div>
+
+<script>
+	var g_image = document.getElementById('g_image');
+	var s_image = document.getElementById('s_image').getElementsByTagName('img');
+	for(var i = 0; i < s_image.length; i++){
+		s_image[i].addEventListener('click', full_image);
+	}
+
+	function full_image(){
+		var ImageSRC = this.getAttribute('src');
+		g_image.innerHTML = "<img src="+ImageSRC+" width='360' height='360' >";
+	}	
+</script>
+{% endblock content %}
+
+
+
