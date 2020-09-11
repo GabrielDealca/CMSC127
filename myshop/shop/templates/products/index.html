@@ -41,7 +41,7 @@
 	      </li>
 
 	      <li class="nav-item">
-	        <a class="nav-link disabled" href="#" tabindex="-1">Cart ({{session['Shoppingcart']|length}})</a>
+	        <a class="nav-link" href="{{url_for('getCart')}}" tabindex="-1">Cart ({{session['Shoppingcart']|length}})</a>
 	      </li>
 	    </ul>
 	    <form class="form-inline my-2 my-lg-0">
@@ -68,7 +68,7 @@
 						<form action="{{url_for('AddCart')}}" method="post">
 							<input type="hidden" name="product_id" value="{{g.id}}">
 							<button type="submit" class="btn btn-sm btn-warning float-right"> Add to cart</button>			
-							<input type="hidden" name="quantity" id="" value="1" min="1" max="{{g.stock}}">			
+							<input type="hidden" name="quantity" id="" value="1">			
 						</form>		
 					</div>
 				</div>
@@ -117,7 +117,7 @@
 						<form action="{{url_for('AddCart')}}" method="post">
 							<input type="hidden" name="product_id" value="{{get_cat.id}}">
 							<button type="submit" class="btn btn-sm btn-warning float-right"> Add to cart</button>			
-							<input type="hidden" name="quantity" id="" value="1" min="1" max="{{get_cat.stock}}">			
+							<input type="hidden" name="quantity" id="" value="1">			
 						</form>		
 					</div>
 				</div>
