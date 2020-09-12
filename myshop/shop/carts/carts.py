@@ -17,7 +17,7 @@ def AddCart():
 		# colors = request.form.get('colors')
 		product = AddProduct.query.filter_by(id=product_id).first()
 		if product_id and quantity and request.method == "POST":
-			DictItems = {product_id:{'name':product.name, 'price':float(product.price), 'quantity':quantity, 'image':product.image_1}}
+			DictItems = {product_id:{'name':product.name, 'stock':int(product.stock), 'price':float(product.price), 'quantity':quantity, 'image':product.image_1}}
 
 			if 'Shoppingcart' in session:
 				print(session['Shoppingcart'])
@@ -44,3 +44,29 @@ def getCart():
 		total += float(product['price']) * int(product['quantity'])
 
 	return render_template('products/carts.html', total=total)
+
+@app.route('/empty')
+def empty_cart():
+	try:
+		session.clear()
+		return redirect(url_for('home'))
+	except Exception as e:
+		print(e)
+
+@app.route('/updatecart/<int:code>', methods=['POST'])
+def updateCart(code):
+	if 'Shoppingcart' not in session and len(session['Shoppingcart']) <= 0:
+		return redirect(url_for('home'))
+	if request.method == "POST":
+		quantity = request.form.get('quantity')
+		try:
+			session.modified = True
+			for key, item in session['Shoppingcart'].items():
+				if int(key) == code:
+					item['quantity'] = quantity
+					flash('Your item in cart has been updated')
+					return redirect(url_for('getCart'))
+		except Exception as e:
+			print(e)
+			return redirect(url_for('getCart'))
+	

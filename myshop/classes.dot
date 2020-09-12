@@ -1,0 +1,11 @@
+digraph "classes" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{AddProduct|category\lcategory_id\ldesc\lgroup\lgroup_id\lid\limage_1\limage_2\limage_3\lname\lprice\lpub_date\lstock\l|}", shape="record"];
+"1" [label="{Addproducts|description\limage_1\limage_2\limage_3\lname\lprice\lstock\l|}", shape="record"];
+"2" [label="{Category|id\lname\l|}", shape="record"];
+"3" [label="{Group|id\lname\l|}", shape="record"];
+"4" [label="{LoginForm|email\lpassword\l|}", shape="record"];
+"5" [label="{RegistrationForm|confirm\lemail\lname\lpassword\lusername\l|}", shape="record"];
+"6" [label="{User|email\lid\lname\lpassword\lusername\l|}", shape="record"];
+}

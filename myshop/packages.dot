@@ -1,0 +1,24 @@
+digraph "packages" {
+charset="utf-8"
+rankdir=BT
+"0" [label="shop", shape="box"];
+"1" [label="shop.admin", shape="box"];
+"2" [label="shop.admin.forms", shape="box"];
+"3" [label="shop.admin.models", shape="box"];
+"4" [label="shop.admin.routes", shape="box"];
+"5" [label="shop.products", shape="box"];
+"6" [label="shop.products.forms", shape="box"];
+"7" [label="shop.products.models", shape="box"];
+"8" [label="shop.products.routes", shape="box"];
+"0" -> "1" [arrowhead="open", arrowtail="none"];
+"0" -> "4" [arrowhead="open", arrowtail="none"];
+"3" -> "0" [arrowhead="open", arrowtail="none"];
+"4" -> "0" [arrowhead="open", arrowtail="none"];
+"4" -> "2" [arrowhead="open", arrowtail="none"];
+"4" -> "3" [arrowhead="open", arrowtail="none"];
+"4" -> "7" [arrowhead="open", arrowtail="none"];
+"7" -> "0" [arrowhead="open", arrowtail="none"];
+"8" -> "0" [arrowhead="open", arrowtail="none"];
+"8" -> "6" [arrowhead="open", arrowtail="none"];
+"8" -> "7" [arrowhead="open", arrowtail="none"];
+}
